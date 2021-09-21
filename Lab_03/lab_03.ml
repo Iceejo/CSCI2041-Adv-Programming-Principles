@@ -25,4 +25,4 @@ let rec remove_odds xs =
 let rec remove_caps xs = 
   match xs with
   | [] -> []
-  | x::rest -> if Char.equal (String.get x 0) (Char.uppercase_ascii (String.get x 0)) then remove_caps rest else x::remove_caps rest
+  | x::rest -> if Char.equal (String.get x 0) (Char.lowercase_ascii (String.get x 0)) then x::remove_caps rest else remove_caps rest
