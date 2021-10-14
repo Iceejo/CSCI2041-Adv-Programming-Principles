@@ -10,7 +10,7 @@ let rec unzip xs =
 (*
 Improvements to unzip: 
 In my second pattern, I originally had (x1', x2'), 
-which I replaced with (x1_next, x2_next) since this is more descriptive and understandable.
+which I replaced with (x1_next, x2_next) since this is more descriptive and understandable. (Elizabeth Grondahl)
 *) 
 
 let group (lst: 'a list): ('a * 'a) list = 
