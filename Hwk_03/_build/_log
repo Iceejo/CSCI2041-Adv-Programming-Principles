@@ -1,0 +1,16 @@
+### Starting build.
+# Target: elf_tests.ml.depends, tags: { extension:ml, file:elf_tests.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules elf_tests.ml > elf_tests.ml.depends # cached
+# Target: elf.mli.depends, tags: { extension:mli, file:elf.mli, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules elf.mli > elf.mli.depends # cached
+# Target: elf.cmi, tags: { byte, compile, extension:mli, file:elf.mli, interf, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o elf.cmi elf.mli # cached
+# Target: elf_tests.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:elf_tests.cmo, file:elf_tests.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o elf_tests.cmo elf_tests.ml # cached
+# Target: elf.ml.depends, tags: { extension:ml, file:elf.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules elf.ml > elf.ml.depends # cached
+# Target: elf.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:elf.cmo, file:elf.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o elf.cmo elf.ml # cached
+# Target: elf_tests.byte, tags: { byte, dont_link_with, extension:byte, file:elf_tests.byte, link, ocaml, program, quiet }
+/usr/bin/ocamlc.opt elf.cmo elf_tests.cmo -o elf_tests.byte # cached
+# Compilation successful.

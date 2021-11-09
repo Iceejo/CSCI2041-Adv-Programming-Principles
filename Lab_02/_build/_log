@@ -1,0 +1,22 @@
+### Starting build.
+# Target: lab_02.mli.depends, tags: { extension:mli, file:lab_02.mli, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules lab_02.mli > lab_02.mli.depends
+# Target: lab_02.cmi, tags: { byte, compile, extension:mli, file:lab_02.mli, interf, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o lab_02.cmi lab_02.mli
+# Target: lab_02.ml.depends, tags: { extension:ml, file:lab_02.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules lab_02.ml > lab_02.ml.depends
+# Target: lab_02.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:lab_02.cmo, file:lab_02.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -o lab_02.cmo lab_02.ml
++ /usr/bin/ocamlc.opt -c -o lab_02.cmo lab_02.ml
+File "lab_02.ml", line 1:
+Error: The implementation lab_02.ml does not match the interface lab_02.cmi:
+       The value `circle_circum_v2' is required but not provided
+       File "lab_02.mli", line 11, characters 0-37: Expected declaration
+       The value `circle_circum_v1' is required but not provided
+       File "lab_02.mli", line 9, characters 0-37: Expected declaration
+       The value `cube' is required but not provided
+       File "lab_02.mli", line 7, characters 0-25: Expected declaration
+       The value `power' is required but not provided
+       File "lab_02.mli", line 5, characters 0-33: Expected declaration
+Command exited with code 2.
+# Compilation unsuccessful.

@@ -1,0 +1,5 @@
+"Resource: /home/ngo00046/csci2041/repo-ngo00046/Lab_02/lab_02.ml": "\212\029\140\217\143\000\178\004\233\128\t\152\236\248B~"
+"Rule: ocaml dependencies ml (%=lab_02 )": "\154ok \004j\207o_j?+\174\021k\245"
+"Resource: /home/ngo00046/csci2041/repo-ngo00046/Lab_02/lab_02.mli": "\252\2437\138`a\198\217I\223\188\193\b\007\227X"
+"Rule: ocaml dependencies mli (%=lab_02 )": "5\222\168\"\237\155\225B\223\228\bX|hy\204"
+"Rule: ocaml: mli -> cmi (%=lab_02 )": "@\140Z\238\225\030\159L\030\174N\129\026m\243#"
