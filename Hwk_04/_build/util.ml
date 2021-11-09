@@ -1,4 +1,4 @@
-
+(*Group member: Audrey Gasser (gasse038@umn.edu)*)
 module type UtilS = sig
   val implode: char list -> string
 
@@ -34,14 +34,17 @@ module UtilM : UtilS = struct
         _ -> [] 
     in read_chars ic
 
+  (*Improvements to split_by: I added comments for each of the match cases to clarify their purpose (Audrey)*)
   let split_by (f: 'a -> bool) (lst: 'a list) : 'a list list = 
     let rec step (next, accum, rest) = 
       match (next, accum, rest) with
-      | ([], acc, []) -> ([], acc, [])
-      | (n, acc, []) -> (n, acc@[List.rev n], [])
-      | (n, acc, x::rest) when f x = false -> step (x::n, acc, rest)
-      | ([], acc, _::rest) -> step ([], acc, rest)
-      | (n, acc, _::rest) -> step ([], acc@[List.rev n], rest)
+      | ([], acc, []) -> ([], acc, []) (*when lst is empty or 
+                                        if the last element in rest returned true when f is called*)
+      | (n, acc, []) -> (n, acc@[List.rev n], []) (*when we've reached the end of the list*)
+      | (n, acc, x::rest) when f x = false -> step (x::n, acc, rest) (*when f x = false*)
+      | ([], acc, _::rest) -> step ([], acc, rest) (*when f x = true for the first element 
+                                                    or two successive elements in rest*)
+      | (n, acc, _::rest) -> step ([], acc@[List.rev n], rest) (*when f x = true*)
     in
     match step ([], [], lst) with
     | (next, accum, l) -> accum

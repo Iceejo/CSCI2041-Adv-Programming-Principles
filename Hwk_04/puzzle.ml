@@ -1,21 +1,17 @@
-(*
-********
-Strategy
-********
+(*Group member: Audrey Gasser (gasse038@umn.edu)*)
+(*Improvements: I originally had my word_answer function nested inside the answers function 
+so I moved it outside of the answers function since separating them helps with readability (Audrey)
 
-Functions I will need:
-
-
-
-*)
-
+I renamed the helper function to check_one, I renamed rare to check_rare, and I renamed all to check_all, 
+since these names are more informative about the functions' purposes (Audrey)*)
 open Set
 open Util
 
 module type PuzzleS = sig
   type st
-  val helper : char -> char list * char * char list -> st -> string
+  val check_one : char -> char list * char * char list -> st -> string
   val positions : string -> (char list * char * char list) list
+  val word_answer : char list -> st -> string -> string * string list
   val answers : string list -> (string * string list) list
 
 end
@@ -23,8 +19,8 @@ end
 module PuzzleF (S: SetS) : PuzzleS = struct
 
   type st = string S.t
-
-  let helper (rare: char)(pos: char list * char * char list)(dict: st): string = 
+  
+  let check_one (rare: char)(pos: char list * char * char list)(dict: st): string = 
     match pos with
     | (pre, c, suf) -> 
       if S.elem (UtilM.implode (pre@[rare]@suf)) dict && rare <> c 
@@ -42,6 +38,21 @@ module PuzzleF (S: SetS) : PuzzleS = struct
     match position ([], cl, []) with
     | (pre, suf, lst) -> lst
 
+  let word_answer (rares: char list)(dict: st)(w: string): string * string list = 
+    let position = positions w in
+    let rec check_all rs pos = 
+      let rec check_rare r pos = 
+        match pos with
+        | [] -> []
+        | p::rest -> (check_one r p dict)::check_rare r rest
+      in
+      match rs with
+      | [] -> []
+      | c::rest -> (check_rare c pos)@check_all rest pos
+    in
+    match (w, check_all rares position) with
+    | (w, ws) -> (w, List.filter ((<>)"") ws)
+
   let answers (word_list: string list) : (string * string list) list = 
     let interest_words = List.filter (fun s -> String.length s >= 5) word_list
     in
@@ -49,23 +60,8 @@ module PuzzleF (S: SetS) : PuzzleS = struct
     in
     let rares = ['j'; 'q'; 'x'; 'z']
     in
-    let word_answer (w: string): string * string list = 
-      let position = positions w in
-      let rec all rs pos = 
-        let rec rare r pos = 
-          match pos with
-          | [] -> []
-          | p::rest -> (helper r p dict)::rare r rest
-        in
-        match rs with
-        | [] -> []
-        | c::rest -> (rare c pos)@all rest pos
-      in
-      match (w, all rares position) with
-      | (w, ws) -> (w, List.filter ((<>)"") ws)
-    in
     List.filter (fun word -> 
                   match word with
-                  |(w, ans) -> (<>) ans []) (List.map word_answer interest_words)
+                  |(w, ans) -> (<>) ans []) (List.map (word_answer rares dict) interest_words)
 
 end
